@@ -28,6 +28,12 @@
                         >
                             Dashboard
                         </a>
+                        <a
+                          href="{{ route('magazijn.index') }}"
+                          class="inline-block px-5 py-1.5 border border-gray-400 text-gray-700 rounded-sm text-sm"
+                        >
+                         Overzicht Magazijn Jamin
+                       </a>
                     @else
                         <a
                             href="{{ route('login') }}"
