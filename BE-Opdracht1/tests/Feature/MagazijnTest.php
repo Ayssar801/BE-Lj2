@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
@@ -40,8 +39,8 @@ class MagazijnTest extends TestCase
         $response->assertSee('Bert van Linge');
         $response->assertSee('L1029384719');
         $response->assertSee('06-28493827');
-        $response->assertSee('09-10-2024');
-        $response->assertSee('18-10-2024');
+        $response->assertSee('09-11-2024');
+        $response->assertSee('18-11-2024');
     }
 
     public function test_user_story_01_scenario_02_levering_info_winegums_geen_voorraad()
