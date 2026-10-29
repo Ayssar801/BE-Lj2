@@ -24,7 +24,7 @@ class JaminSeeder extends Seeder
             ['ProductId' => 7, 'Naam' => 'Witte Muizen', 'Barcode' => '8719587328256', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
             ['ProductId' => 8, 'Naam' => 'Reuzen Slangen', 'Barcode' => '8719587325641', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
             ['ProductId' => 9, 'Naam' => 'Zoute Rijen', 'Barcode' => '8719587322739', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
-            ['ProductId' => 10, 'Naam' => 'Winegums', 'Barcode' => '8719587327527', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
+            ['ProductId' => 10, 'Naam' => 'Winegums', 'Barcode' => '8719587327527', 'IsActief' => false, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
             ['ProductId' => 11, 'Naam' => 'Drop Munten', 'Barcode' => '8719587322345', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
             ['ProductId' => 12, 'Naam' => 'Kruis Drop', 'Barcode' => '8719587322265', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
             ['ProductId' => 13, 'Naam' => 'Zoute Ruitjes', 'Barcode' => '8719587323256', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
@@ -46,32 +46,50 @@ class JaminSeeder extends Seeder
             ['MagazijnId' => 13, 'ProductId' => 13, 'VerpakkingsEenheidInKilogram' => 5, 'AantalAanwezig' => 20, 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
         ]);
 
-        DB::table('leveranciers')->insertOrIgnore([
+        DB::table('leveranciers')->upsert([
             ['LeverancierId' => 1, 'Naam' => 'Venco', 'ContactPersoon' => 'Bert van Linge', 'LeverancierNummer' => 'L1029384719', 'Mobiel' => '06-28493827', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
             ['LeverancierId' => 2, 'Naam' => 'Astra Sweets', 'ContactPersoon' => 'Jasper del Monte', 'LeverancierNummer' => 'L1029284315', 'Mobiel' => '06-39398734', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
             ['LeverancierId' => 3, 'Naam' => 'Haribo', 'ContactPersoon' => 'Sven Stalman', 'LeverancierNummer' => 'L1029324748', 'Mobiel' => '06-24383291', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
             ['LeverancierId' => 4, 'Naam' => 'Basset', 'ContactPersoon' => 'Joyce Stelterberg', 'LeverancierNummer' => 'L1023845773', 'Mobiel' => '06-48293823', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
             ['LeverancierId' => 5, 'Naam' => 'De Bron', 'ContactPersoon' => 'Remco Veenstra', 'LeverancierNummer' => 'L1023857736', 'Mobiel' => '06-34291234', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
+            ['LeverancierId' => 6, 'Naam' => 'Quality Street', 'ContactPersoon' => 'Johan Nooij', 'LeverancierNummer' => 'L1029234586', 'Mobiel' => '06-23458456', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
+        ], ['LeverancierId'], [
+            'Naam',
+            'ContactPersoon',
+            'LeverancierNummer',
+            'Mobiel',
+            'IsActief',
+            'Opmerking',
         ]);
 
-        DB::table('product_per_leveranciers')->insertOrIgnore([
-            ['ProductPerLeverancierId' => 1, 'LeverancierId' => 1, 'ProductId' => 1, 'DatumLevering' => '2024-10-09', 'Aantal' => 23, 'DatumEerstVolgendeLevering' => '2024-10-16', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
-            ['ProductPerLeverancierId' => 2, 'LeverancierId' => 1, 'ProductId' => 1, 'DatumLevering' => '2024-10-18', 'Aantal' => 21, 'DatumEerstVolgendeLevering' => '2024-10-25', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
-            ['ProductPerLeverancierId' => 3, 'LeverancierId' => 1, 'ProductId' => 2, 'DatumLevering' => '2024-10-09', 'Aantal' => 12, 'DatumEerstVolgendeLevering' => '2024-10-16', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
-            ['ProductPerLeverancierId' => 4, 'LeverancierId' => 1, 'ProductId' => 3, 'DatumLevering' => '2024-10-10', 'Aantal' => 11, 'DatumEerstVolgendeLevering' => '2024-10-17', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
-            ['ProductPerLeverancierId' => 5, 'LeverancierId' => 2, 'ProductId' => 4, 'DatumLevering' => '2024-10-14', 'Aantal' => 16, 'DatumEerstVolgendeLevering' => '2024-10-21', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
-            ['ProductPerLeverancierId' => 6, 'LeverancierId' => 2, 'ProductId' => 4, 'DatumLevering' => '2024-10-21', 'Aantal' => 23, 'DatumEerstVolgendeLevering' => '2024-10-28', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
-            ['ProductPerLeverancierId' => 7, 'LeverancierId' => 2, 'ProductId' => 5, 'DatumLevering' => '2024-10-14', 'Aantal' => 45, 'DatumEerstVolgendeLevering' => '2024-10-21', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
-            ['ProductPerLeverancierId' => 8, 'LeverancierId' => 2, 'ProductId' => 6, 'DatumLevering' => '2024-10-14', 'Aantal' => 30, 'DatumEerstVolgendeLevering' => '2024-10-21', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
-            ['ProductPerLeverancierId' => 9, 'LeverancierId' => 3, 'ProductId' => 7, 'DatumLevering' => '2024-10-12', 'Aantal' => 12, 'DatumEerstVolgendeLevering' => '2024-10-19', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
-            ['ProductPerLeverancierId' => 10, 'LeverancierId' => 3, 'ProductId' => 7, 'DatumLevering' => '2024-10-19', 'Aantal' => 23, 'DatumEerstVolgendeLevering' => '2024-10-26', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
-            ['ProductPerLeverancierId' => 11, 'LeverancierId' => 3, 'ProductId' => 8, 'DatumLevering' => '2024-10-10', 'Aantal' => 12, 'DatumEerstVolgendeLevering' => '2024-10-17', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
-            ['ProductPerLeverancierId' => 12, 'LeverancierId' => 3, 'ProductId' => 9, 'DatumLevering' => '2024-10-11', 'Aantal' => 1, 'DatumEerstVolgendeLevering' => '2024-10-18', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
-            ['ProductPerLeverancierId' => 13, 'LeverancierId' => 4, 'ProductId' => 10, 'DatumLevering' => '2024-10-16', 'Aantal' => 24, 'DatumEerstVolgendeLevering' => '2023-04-30', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
-            ['ProductPerLeverancierId' => 14, 'LeverancierId' => 5, 'ProductId' => 11, 'DatumLevering' => '2024-10-10', 'Aantal' => 47, 'DatumEerstVolgendeLevering' => '2024-10-17', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
-            ['ProductPerLeverancierId' => 15, 'LeverancierId' => 5, 'ProductId' => 11, 'DatumLevering' => '2024-10-19', 'Aantal' => 60, 'DatumEerstVolgendeLevering' => '2024-10-26', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
-            ['ProductPerLeverancierId' => 16, 'LeverancierId' => 5, 'ProductId' => 12, 'DatumLevering' => '2024-10-11', 'Aantal' => 45, 'DatumEerstVolgendeLevering' => null, 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
-            ['ProductPerLeverancierId' => 17, 'LeverancierId' => 5, 'ProductId' => 13, 'DatumLevering' => '2024-10-12', 'Aantal' => 23, 'DatumEerstVolgendeLevering' => null, 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
+        DB::table('producten')->where('ProductId', 10)->update(['IsActief' => false]);
+
+        DB::table('product_per_leveranciers')->upsert([
+            ['ProductPerLeverancierId' => 1, 'LeverancierId' => 1, 'ProductId' => 1, 'DatumLevering' => '2024-11-09', 'Aantal' => 23, 'DatumEerstVolgendeLevering' => '2024-11-16', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
+            ['ProductPerLeverancierId' => 2, 'LeverancierId' => 1, 'ProductId' => 1, 'DatumLevering' => '2024-11-18', 'Aantal' => 21, 'DatumEerstVolgendeLevering' => '2024-11-25', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
+            ['ProductPerLeverancierId' => 3, 'LeverancierId' => 1, 'ProductId' => 2, 'DatumLevering' => '2024-11-09', 'Aantal' => 12, 'DatumEerstVolgendeLevering' => '2024-11-16', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
+            ['ProductPerLeverancierId' => 4, 'LeverancierId' => 1, 'ProductId' => 3, 'DatumLevering' => '2024-11-10', 'Aantal' => 11, 'DatumEerstVolgendeLevering' => '2024-11-17', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
+            ['ProductPerLeverancierId' => 5, 'LeverancierId' => 2, 'ProductId' => 4, 'DatumLevering' => '2024-11-14', 'Aantal' => 16, 'DatumEerstVolgendeLevering' => '2024-11-21', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
+            ['ProductPerLeverancierId' => 6, 'LeverancierId' => 2, 'ProductId' => 4, 'DatumLevering' => '2024-11-21', 'Aantal' => 23, 'DatumEerstVolgendeLevering' => '2024-11-28', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
+            ['ProductPerLeverancierId' => 7, 'LeverancierId' => 2, 'ProductId' => 5, 'DatumLevering' => '2024-11-14', 'Aantal' => 45, 'DatumEerstVolgendeLevering' => '2024-11-21', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
+            ['ProductPerLeverancierId' => 8, 'LeverancierId' => 2, 'ProductId' => 6, 'DatumLevering' => '2024-11-14', 'Aantal' => 30, 'DatumEerstVolgendeLevering' => '2024-11-21', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
+            ['ProductPerLeverancierId' => 9, 'LeverancierId' => 3, 'ProductId' => 7, 'DatumLevering' => '2024-11-12', 'Aantal' => 12, 'DatumEerstVolgendeLevering' => '2024-11-19', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
+            ['ProductPerLeverancierId' => 10, 'LeverancierId' => 3, 'ProductId' => 7, 'DatumLevering' => '2024-11-19', 'Aantal' => 23, 'DatumEerstVolgendeLevering' => '2024-11-26', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
+            ['ProductPerLeverancierId' => 11, 'LeverancierId' => 3, 'ProductId' => 8, 'DatumLevering' => '2024-11-10', 'Aantal' => 12, 'DatumEerstVolgendeLevering' => '2024-11-17', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
+            ['ProductPerLeverancierId' => 12, 'LeverancierId' => 3, 'ProductId' => 9, 'DatumLevering' => '2024-11-11', 'Aantal' => 1, 'DatumEerstVolgendeLevering' => '2024-11-18', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
+            ['ProductPerLeverancierId' => 13, 'LeverancierId' => 4, 'ProductId' => 10, 'DatumLevering' => '2024-11-16', 'Aantal' => 24, 'DatumEerstVolgendeLevering' => '2023-04-30', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
+            ['ProductPerLeverancierId' => 14, 'LeverancierId' => 5, 'ProductId' => 11, 'DatumLevering' => '2024-11-10', 'Aantal' => 47, 'DatumEerstVolgendeLevering' => '2024-11-17', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
+            ['ProductPerLeverancierId' => 15, 'LeverancierId' => 5, 'ProductId' => 11, 'DatumLevering' => '2024-11-19', 'Aantal' => 60, 'DatumEerstVolgendeLevering' => '2024-11-26', 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
+            ['ProductPerLeverancierId' => 16, 'LeverancierId' => 5, 'ProductId' => 12, 'DatumLevering' => '2024-11-11', 'Aantal' => 45, 'DatumEerstVolgendeLevering' => null, 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
+            ['ProductPerLeverancierId' => 17, 'LeverancierId' => 5, 'ProductId' => 13, 'DatumLevering' => '2024-11-12', 'Aantal' => 23, 'DatumEerstVolgendeLevering' => null, 'IsActief' => true, 'Opmerking' => null, 'DatumAangemaakt' => $datum, 'DatumGewijzigd' => null],
+        ], ['ProductPerLeverancierId'], [
+            'LeverancierId',
+            'ProductId',
+            'DatumLevering',
+            'Aantal',
+            'DatumEerstVolgendeLevering',
+            'IsActief',
+            'Opmerking',
         ]);
 
         DB::table('allergenen')->insertOrIgnore([
