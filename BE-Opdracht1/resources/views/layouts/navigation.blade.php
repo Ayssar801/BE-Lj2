@@ -16,9 +16,19 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('magazijn.index')" :active="request()->routeIs('magazijn.index')">
-                        Overzicht Magazijn Jamin
-                    </x-nav-link>
+                    @if (Auth::user()->hasAnyRole([\App\Enums\UserRole::Beheerder, \App\Enums\UserRole::Magazijnmedewerker]))
+                        <x-nav-link :href="route('magazijn.index')" :active="request()->routeIs('magazijn.index')">
+                            Overzicht Magazijn Jamin
+                        </x-nav-link>
+                        <x-nav-link :href="route('leveranciers.index')" :active="request()->routeIs('leveranciers.*')">
+                            Overzicht Leveranciers
+                        </x-nav-link>
+                    @endif
+                    @if (Auth::user()->hasRole(\App\Enums\UserRole::Beheerder))
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+                            Gebruikers beheren
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -75,9 +85,19 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('magazijn.index')" :active="request()->routeIs('magazijn.index')">
-                Overzicht Magazijn Jamin
-            </x-responsive-nav-link>
+            @if (Auth::user()->hasAnyRole([\App\Enums\UserRole::Beheerder, \App\Enums\UserRole::Magazijnmedewerker]))
+                <x-responsive-nav-link :href="route('magazijn.index')" :active="request()->routeIs('magazijn.index')">
+                    Overzicht Magazijn Jamin
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('leveranciers.index')" :active="request()->routeIs('leveranciers.*')">
+                    Overzicht Leveranciers
+                </x-responsive-nav-link>
+            @endif
+            @if (Auth::user()->hasRole(\App\Enums\UserRole::Beheerder))
+                <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+                    Gebruikers beheren
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
