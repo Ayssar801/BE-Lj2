@@ -7,6 +7,22 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Rollen in Opdracht 1
+
+De applicatie heeft drie rollen:
+
+- **Beheerder**: kan gebruikers bekijken en hun rol wijzigen via **Gebruikers beheren**.
+- **Magazijnmedewerker**: kan de magazijnpagina's bekijken.
+- **Klant**: kan inloggen op het dashboard, maar heeft geen toegang tot magazijnpagina's.
+
+Bij registratie kiest de gebruiker tussen `magazijnmedewerker` en `klant`. Een beheerder kan niet zelf via registratie worden gekozen. Maak de eerste beheerder aan vanuit de projectmap. Het commando vraagt interactief om een wachtwoord en bevestiging:
+
+```bash
+php artisan user:create-admin "Naam Beheerder" beheerder@example.com
+```
+
+Een beheerder kan de laatste beheerder niet degraderen. Toegang wordt server-side gecontroleerd. Klanten hebben alleen toegang tot het dashboard.
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
