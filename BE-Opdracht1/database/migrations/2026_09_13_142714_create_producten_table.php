@@ -10,18 +10,18 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-{
-    Schema::create('producten', function (Blueprint $table) {
-        $table->id('ProductId');
-        $table->string('Naam', 100);
-        $table->string('Barcode', 20)->unique();
+    {
+        Schema::create('producten', function (Blueprint $table) {
+            $table->id('ProductId');
+            $table->string('Naam', 100);
+            $table->string('Barcode', 20)->unique();
 
-        $table->boolean('IsActief')->default(true);
-        $table->string('Opmerking', 250)->nullable();
-        $table->dateTime('DatumAangemaakt', 6);
-        $table->dateTime('DatumGewijzigd', 6)->nullable();
-    });
-}
+            $table->boolean('IsActief')->default(true);
+            $table->string('Opmerking', 255)->nullable();
+            $table->dateTime('DatumAangemaakt', 6);
+            $table->dateTime('DatumGewijzigd', 6)->nullable()->useCurrent()->useCurrentOnUpdate();
+        });
+    }
 
     /**
      * Reverse the migrations.

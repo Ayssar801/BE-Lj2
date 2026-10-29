@@ -10,20 +10,20 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-{
-    Schema::create('leveranciers', function (Blueprint $table) {
-        $table->id('LeverancierId');
-        $table->string('Naam', 100);
-        $table->string('ContactPersoon', 100);
-        $table->string('LeverancierNummer', 20)->unique();
-        $table->string('Mobiel', 20);
+    {
+        Schema::create('leveranciers', function (Blueprint $table) {
+            $table->id('LeverancierId');
+            $table->string('Naam', 100);
+            $table->string('ContactPersoon', 100);
+            $table->string('LeverancierNummer', 20)->unique();
+            $table->string('Mobiel', 20);
 
-        $table->boolean('IsActief')->default(true);
-        $table->string('Opmerking', 250)->nullable();
-        $table->dateTime('DatumAangemaakt', 6);
-        $table->dateTime('DatumGewijzigd', 6)->nullable();
-    });
-}
+            $table->boolean('IsActief')->default(true);
+            $table->string('Opmerking', 255)->nullable();
+            $table->dateTime('DatumAangemaakt', 6);
+            $table->dateTime('DatumGewijzigd', 6)->nullable()->useCurrent()->useCurrentOnUpdate();
+        });
+    }
 
     /**
      * Reverse the migrations.

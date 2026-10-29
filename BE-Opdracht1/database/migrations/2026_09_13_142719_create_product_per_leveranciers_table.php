@@ -10,32 +10,32 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-{
-    Schema::create('product_per_leveranciers', function (Blueprint $table) {
-        $table->id('ProductPerLeverancierId');
+    {
+        Schema::create('product_per_leveranciers', function (Blueprint $table) {
+            $table->id('ProductPerLeverancierId');
 
-        $table->unsignedBigInteger('LeverancierId');
-        $table->unsignedBigInteger('ProductId');
-        $table->date('DatumLevering');
-        $table->unsignedInteger('Aantal');
-        $table->date('DatumEerstVolgendeLevering')->nullable();
+            $table->unsignedBigInteger('LeverancierId');
+            $table->unsignedBigInteger('ProductId');
+            $table->date('DatumLevering');
+            $table->unsignedInteger('Aantal');
+            $table->date('DatumEerstVolgendeLevering')->nullable();
 
-        $table->boolean('IsActief')->default(true);
-        $table->string('Opmerking', 250)->nullable();
-        $table->dateTime('DatumAangemaakt', 6);
-        $table->dateTime('DatumGewijzigd', 6)->nullable();
+            $table->boolean('IsActief')->default(true);
+            $table->string('Opmerking', 255)->nullable();
+            $table->dateTime('DatumAangemaakt', 6);
+            $table->dateTime('DatumGewijzigd', 6)->nullable()->useCurrent()->useCurrentOnUpdate();
 
-        $table->foreign('LeverancierId')
-            ->references('LeverancierId')
-            ->on('leveranciers')
-            ->onDelete('cascade');
+            $table->foreign('LeverancierId')
+                ->references('LeverancierId')
+                ->on('leveranciers')
+                ->onDelete('cascade');
 
-             $table->foreign('ProductId')
-            ->references('ProductId')
-            ->on('producten')
-            ->onDelete('cascade');
-    });
-}
+            $table->foreign('ProductId')
+                ->references('ProductId')
+                ->on('producten')
+                ->onDelete('cascade');
+        });
+    }
 
     /**
      * Reverse the migrations.

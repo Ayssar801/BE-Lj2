@@ -10,25 +10,25 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-{
-    Schema::create('magazijnen', function (Blueprint $table) {
-        $table->id('MagazijnId');
+    {
+        Schema::create('magazijnen', function (Blueprint $table) {
+            $table->id('MagazijnId');
 
-        $table->unsignedBigInteger('ProductId');
-        $table->decimal('VerpakkingsEenheidInKilogram', 5, 2);
-        $table->unsignedInteger('AantalAanwezig')->nullable();
+            $table->unsignedBigInteger('ProductId');
+            $table->decimal('VerpakkingsEenheidInKilogram', 5, 2);
+            $table->unsignedInteger('AantalAanwezig')->nullable();
 
-        $table->boolean('IsActief')->default(true);
-        $table->string('Opmerking', 250)->nullable();
-        $table->dateTime('DatumAangemaakt', 6);
-        $table->dateTime('DatumGewijzigd', 6)->nullable();
+            $table->boolean('IsActief')->default(true);
+            $table->string('Opmerking', 255)->nullable();
+            $table->dateTime('DatumAangemaakt', 6);
+            $table->dateTime('DatumGewijzigd', 6)->nullable()->useCurrent()->useCurrentOnUpdate();
 
-        $table->foreign('ProductId')
-            ->references('ProductId')
-            ->on('producten')
-            ->onDelete('cascade');
-    });
-}
+            $table->foreign('ProductId')
+                ->references('ProductId')
+                ->on('producten')
+                ->onDelete('cascade');
+        });
+    }
 
     /**
      * Reverse the migrations.
