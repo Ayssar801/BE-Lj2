@@ -11,6 +11,14 @@ class Magazijn extends Model
 
     protected $primaryKey = 'MagazijnId';
 
+    protected $fillable = [
+        'ProductId',
+        'VerpakkingsEenheidInKilogram',
+        'AantalAanwezig',
+        'IsActief',
+        'Opmerking',
+    ];
+
     public const CREATED_AT = 'DatumAangemaakt';
 
     public const UPDATED_AT = 'DatumGewijzigd';

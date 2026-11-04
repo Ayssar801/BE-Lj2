@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Product extends Model
@@ -11,6 +12,13 @@ class Product extends Model
     protected $table = 'producten';
 
     protected $primaryKey = 'ProductId';
+
+    protected $fillable = [
+        'Naam',
+        'Barcode',
+        'IsActief',
+        'Opmerking',
+    ];
 
     public const CREATED_AT = 'DatumAangemaakt';
 
@@ -47,6 +55,11 @@ class Product extends Model
             'IsActief',
             'Opmerking',
         ])->withTimestamps('DatumAangemaakt', 'DatumGewijzigd');
+    }
+
+    public function leveringen(): HasMany
+    {
+        return $this->hasMany(ProductPerLeverancier::class, 'ProductId', 'ProductId');
     }
 
     public function allergenen(): BelongsToMany

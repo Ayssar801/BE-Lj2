@@ -11,6 +11,13 @@ class Allergeen extends Model
 
     protected $primaryKey = 'AllergeenId';
 
+    protected $fillable = [
+        'Naam',
+        'Omschrijving',
+        'IsActief',
+        'Opmerking',
+    ];
+
     public const CREATED_AT = 'DatumAangemaakt';
 
     public const UPDATED_AT = 'DatumGewijzigd';
