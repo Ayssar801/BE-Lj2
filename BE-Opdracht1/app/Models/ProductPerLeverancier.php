@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProductPerLeverancier extends Model
 {
+    // Koppelt een leverancier aan een product en bewaart de leveringsgegevens.
     protected $table = 'product_per_leveranciers';
 
     protected $primaryKey = 'ProductPerLeverancierId';
@@ -37,11 +38,13 @@ class ProductPerLeverancier extends Model
         ];
     }
 
+    // Elke leveringsregel verwijst naar één product.
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class, 'ProductId', 'ProductId');
     }
 
+    // Elke leveringsregel verwijst naar één leverancier.
     public function leverancier(): BelongsTo
     {
         return $this->belongsTo(Leverancier::class, 'LeverancierId', 'LeverancierId');

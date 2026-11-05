@@ -9,8 +9,10 @@ use Illuminate\View\View;
 
 class LeverancierController extends Controller
 {
+    // Laravel injecteert de repository voor databasebewerkingen rond leveranciers.
     public function __construct(private LeverancierRepository $leveranciers) {}
 
+    // Toont het overzicht met leveranciers.
     public function index(): View
     {
         $leveranciers = $this->leveranciers->getLeveranciers();
@@ -18,6 +20,7 @@ class LeverancierController extends Controller
         return view('leveranciers.index', compact('leveranciers'));
     }
 
+    // Toont de gegevens en producten van de gekozen leverancier.
     public function producten(int $leverancierId): View
     {
         $leverancier = $this->leveranciers->getLeverancier($leverancierId);
@@ -31,6 +34,7 @@ class LeverancierController extends Controller
         return view('leveranciers.producten', compact('leverancier', 'producten'));
     }
 
+    // Controleert de leverancier/productcombinatie en toont het leveringsformulier.
     public function createLevering(int $leverancierId, int $productId): View
     {
         $leverancier = $this->leveranciers->getLeverancierProduct($leverancierId, $productId);
@@ -42,6 +46,7 @@ class LeverancierController extends Controller
         return view('leveranciers.levering', compact('leverancier'));
     }
 
+    // Valideert het formulier en laat de repository de levering opslaan.
     public function storeLevering(Request $request, int $leverancierId, int $productId): RedirectResponse
     {
         $leverancier = $this->leveranciers->getLeverancierProduct($leverancierId, $productId);

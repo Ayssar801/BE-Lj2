@@ -23,6 +23,7 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
+    // Zet opgeslagen rolwaarden om naar UserRole-enums en verbergt gevoelige velden.
     protected function casts(): array
     {
         return [
@@ -32,6 +33,7 @@ class User extends Authenticatable
         ];
     }
 
+    // Controleert of deze gebruiker precies de opgegeven rol heeft.
     public function hasRole(UserRole|string $role): bool
     {
         $role = $role instanceof UserRole ? $role : UserRole::tryFrom($role);
@@ -42,6 +44,7 @@ class User extends Authenticatable
     /**
      * @param  array<UserRole|string>  $roles
      */
+    // Geeft true terug zodra de gebruiker een van de opgegeven rollen heeft.
     public function hasAnyRole(array $roles): bool
     {
         foreach ($roles as $role) {

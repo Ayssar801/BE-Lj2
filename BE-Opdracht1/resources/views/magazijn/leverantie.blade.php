@@ -1,4 +1,5 @@
 <x-app-layout>
+    {{-- Laat de leverancier en leveringshistorie van het gekozen product zien. --}}
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Levering Informatie
@@ -16,6 +17,7 @@
                 </div>
 
                 @if ($heeftGeenVoorraad)
+                    {{-- Zonder voorraad tonen we de verwachte leverdatum en keren we terug naar het overzicht. --}}
                     <table class="w-full border-collapse border border-gray-300">
                         <thead>
                             <tr class="bg-gray-100">
@@ -39,6 +41,7 @@
                         }, 4000);
                     </script>
                 @else
+                    {{-- Met voorraad tonen we de gevonden leveringen in een tabel. --}}
                     <table class="w-full border-collapse border border-gray-300">
                         <thead>
                             <tr class="bg-gray-100">

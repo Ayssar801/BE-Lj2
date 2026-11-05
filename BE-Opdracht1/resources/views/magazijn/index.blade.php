@@ -1,4 +1,5 @@
 <x-app-layout>
+    {{-- Toont de product- en voorraadgegevens die de controller heeft opgehaald. --}}
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Overzicht Magazijn Jamin
@@ -27,10 +28,12 @@
                                 <td class="border border-gray-300 px-4 py-2 text-right">{{ $product->VerpakkingsEenheidInKilogram }}</td>
                                 <td class="border border-gray-300 px-4 py-2 text-right">{{ $product->AantalAanwezig ?? 'Geen voorraad' }}</td>
                                 <td class="border border-gray-300 px-4 py-2 text-center">
+                                    {{-- Deze link opent de allergenenpagina voor dit product. --}}
                                     <a href="{{ route('allergenen.show', ['productId' => $product->product_id]) }}"
                                        title="Allergeneninformatie" class="text-red-600 hover:text-red-800 font-bold text-xl inline-block px-2 py-1">❌</a>
                                 </td>
                                 <td class="border border-gray-300 px-4 py-2 text-center">
+                                    {{-- Deze link opent de leveringsinformatie voor dit product. --}}
                                     <a href="{{ route('leverantie.show', ['productId' => $product->product_id]) }}"
                                        title="Leverantie informatie" class="text-blue-600 hover:text-blue-800 font-bold text-xl inline-block px-2 py-1">?</a>
                                 </td>

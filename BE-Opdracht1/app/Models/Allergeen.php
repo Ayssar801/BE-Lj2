@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Allergeen extends Model
 {
+    // Bevat de naam en omschrijving van een allergeen.
     protected $table = 'allergenen';
 
     protected $primaryKey = 'AllergeenId';
@@ -31,6 +32,7 @@ class Allergeen extends Model
         ];
     }
 
+    // Een allergeen kan bij meerdere producten horen.
     public function producten(): BelongsToMany
     {
         return $this->belongsToMany(

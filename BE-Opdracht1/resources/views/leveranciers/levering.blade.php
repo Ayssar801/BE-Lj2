@@ -1,4 +1,5 @@
 <x-app-layout>
+    {{-- Formulier waarmee een medewerker een nieuwe levering kan registreren. --}}
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Levering product
@@ -27,6 +28,7 @@
                 @endif
 
                 <form method="POST" action="{{ route('leveranciers.levering.store', [$leverancier->LeverancierId, $leverancier->ProductId]) }}" class="space-y-5">
+                    {{-- CSRF-token beveiligt het POST-formulier tegen vervalste verzoeken. --}}
                     @csrf
 
                     <div class="flex flex-wrap items-center gap-4">

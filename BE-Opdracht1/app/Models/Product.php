@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Product extends Model
 {
+    // Koppelt dit model aan de eigen tabel- en sleutelnaam in de database.
     protected $table = 'producten';
 
     protected $primaryKey = 'ProductId';
@@ -33,11 +34,13 @@ class Product extends Model
         ];
     }
 
+    // Eloquent laadt de gekoppelde voorraadgegevens via deze relatie.
     public function magazijn(): HasOne
     {
         return $this->hasOne(Magazijn::class, 'ProductId', 'ProductId');
     }
 
+    // Producten en leveranciers zijn gekoppeld via de leveringstabel.
     public function leveranciers(): BelongsToMany
     {
         return $this->belongsToMany(
@@ -57,11 +60,13 @@ class Product extends Model
         ])->withTimestamps('DatumAangemaakt', 'DatumGewijzigd');
     }
 
+    // Bevat de afzonderlijke leveringsregels van dit product.
     public function leveringen(): HasMany
     {
         return $this->hasMany(ProductPerLeverancier::class, 'ProductId', 'ProductId');
     }
 
+    // Producten en allergenen zijn many-to-many gekoppeld via een koppeltabel.
     public function allergenen(): BelongsToMany
     {
         return $this->belongsToMany(

@@ -1,4 +1,5 @@
 <x-app-layout>
+    {{-- Toont de leverancierslijst die de controller aan de view heeft meegegeven. --}}
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Overzicht leveranciers

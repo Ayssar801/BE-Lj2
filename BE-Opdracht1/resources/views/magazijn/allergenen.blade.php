@@ -1,4 +1,5 @@
 <x-app-layout>
+    {{-- Toont productgegevens en de allergenen die eraan gekoppeld zijn. --}}
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Overzicht Allergenen
@@ -22,6 +23,7 @@
                     </thead>
                     <tbody>
                         @if ($allergenen->isEmpty())
+                            {{-- Een lege verzameling betekent dat er geen allergenen gekoppeld zijn. --}}
                             <tr>
                                 <td colspan="2" class="border border-gray-300 px-4 py-4 text-center text-gray-700 italic font-medium">
                                     In dit product zitten geen stoffen die een allergische reactie kunnen veroorzaken

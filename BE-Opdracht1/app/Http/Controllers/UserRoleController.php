@@ -11,6 +11,7 @@ use Illuminate\View\View;
 
 class UserRoleController extends Controller
 {
+    // Geeft alle gebruikers en beschikbare rollen door aan de beheerderspagina.
     public function index(): View
     {
         return view('users.index', [
@@ -19,6 +20,7 @@ class UserRoleController extends Controller
         ]);
     }
 
+    // Valideert en wijzigt een rol; de laatste beheerder kan niet worden gedegradeerd.
     public function update(Request $request, User $user): RedirectResponse
     {
         $validated = $request->validate([

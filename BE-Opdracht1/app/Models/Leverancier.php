@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Leverancier extends Model
 {
+    // Bevat de gegevens van leveranciers.
     protected $table = 'leveranciers';
 
     protected $primaryKey = 'LeverancierId';
@@ -34,6 +35,7 @@ class Leverancier extends Model
         ];
     }
 
+    // Een leverancier kan meerdere producten leveren.
     public function producten(): BelongsToMany
     {
         return $this->belongsToMany(
@@ -53,6 +55,7 @@ class Leverancier extends Model
         ])->withTimestamps('DatumAangemaakt', 'DatumGewijzigd');
     }
 
+    // Levert de losse leveringsregels van deze leverancier.
     public function leveringen(): HasMany
     {
         return $this->hasMany(ProductPerLeverancier::class, 'LeverancierId', 'LeverancierId');

@@ -1,4 +1,5 @@
 <x-app-layout>
+    {{-- Toont de gegevens van één leverancier en diens geleverde producten. --}}
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Geleverde producten

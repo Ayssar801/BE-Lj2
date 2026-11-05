@@ -14,10 +14,12 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Magazijnpagina's zijn alleen toegankelijk voor ingelogde medewerkers en beheerders.
 Route::get('/magazijn', [MagazijnController::class, 'index'])
     ->middleware(['auth', 'role:beheerder,magazijnmedewerker'])
     ->name('magazijn.index');
 
+// Leveranciers bekijken en nieuwe leveringen registreren.
 Route::middleware(['auth', 'role:beheerder,magazijnmedewerker'])->group(function () {
     Route::get('/leveranciers', [LeverancierController::class, 'index'])
         ->name('leveranciers.index');
@@ -29,6 +31,7 @@ Route::middleware(['auth', 'role:beheerder,magazijnmedewerker'])->group(function
         ->name('leveranciers.levering.store');
 });
 
+// Extra productinformatie vanuit het magazijnoverzicht.
 Route::get('/leverantie/{productId}', [MagazijnController::class, 'leverantie'])
     ->middleware(['auth', 'role:beheerder,magazijnmedewerker'])
     ->name('leverantie.show');
@@ -37,6 +40,7 @@ Route::get('/allergenen/{productId}', [MagazijnController::class, 'allergenen'])
     ->middleware(['auth', 'role:beheerder,magazijnmedewerker'])
     ->name('allergenen.show');
 
+// Alleen beheerders mogen gebruikersrollen beheren; profielroutes zijn voor iedere ingelogde gebruiker.
 Route::middleware('auth')->group(function () {
     Route::get('/users', [UserRoleController::class, 'index'])
         ->middleware('role:beheerder')

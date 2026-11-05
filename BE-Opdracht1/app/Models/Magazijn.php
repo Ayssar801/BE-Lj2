@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Magazijn extends Model
 {
+    // Bevat de voorraad- en verpakkingsgegevens van een product.
     protected $table = 'magazijnen';
 
     protected $primaryKey = 'MagazijnId';
@@ -34,6 +35,7 @@ class Magazijn extends Model
         ];
     }
 
+    // Ieder magazijnrecord hoort bij één product.
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class, 'ProductId', 'ProductId');

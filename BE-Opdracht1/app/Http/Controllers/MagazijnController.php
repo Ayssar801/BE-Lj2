@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 
 class MagazijnController extends Controller
 {
+    // Haalt product- en voorraadgegevens op voor het magazijnoverzicht.
     public function index()
     {
         $producten = DB::table('producten')
@@ -28,6 +29,7 @@ class MagazijnController extends Controller
         return view('magazijn.index', compact('producten'));
     }
 
+    // Toont de leverancier, voorraad en leveringshistorie van één product.
     public function leverantie($productId)
     {
         $product = DB::table('producten')
@@ -100,6 +102,7 @@ class MagazijnController extends Controller
         ));
     }
 
+    // Zoekt een product en toont de allergenen die eraan gekoppeld zijn.
     public function allergenen($productId)
     {
         $product = DB::table('producten')
