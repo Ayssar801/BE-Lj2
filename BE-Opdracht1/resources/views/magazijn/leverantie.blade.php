@@ -54,7 +54,7 @@
                         <tbody>
                             @forelse ($leveringen as $levering)
                                 <tr class="hover:bg-gray-50">
-                                    <td class="border border-gray-300 px-4 py-2">{{ $levering->ProductName }}</td>
+                                    <td class="border border-gray-300 px-4 py-2">{{ $levering->product->Naam }}</td>
                                     <td class="border border-gray-300 px-4 py-2">{{ date('d-m-Y', strtotime($levering->DatumLevering)) }}</td>
                                     <td class="border border-gray-300 px-4 py-2 text-right">{{ $levering->Aantal }}</td>
                                     <td class="border border-gray-300 px-4 py-2">

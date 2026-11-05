@@ -25,16 +25,16 @@
                             <tr class="hover:bg-gray-50">
                                 <td class="border border-gray-300 px-4 py-2">{{ $product->Barcode }}</td>
                                 <td class="border border-gray-300 px-4 py-2">{{ $product->Naam }}</td>
-                                <td class="border border-gray-300 px-4 py-2 text-right">{{ $product->VerpakkingsEenheidInKilogram }}</td>
-                                <td class="border border-gray-300 px-4 py-2 text-right">{{ $product->AantalAanwezig ?? 'Geen voorraad' }}</td>
+                                <td class="border border-gray-300 px-4 py-2 text-right">{{ $product->magazijn?->VerpakkingsEenheidInKilogram }}</td>
+                                <td class="border border-gray-300 px-4 py-2 text-right">{{ $product->magazijn?->AantalAanwezig ?? 'Geen voorraad' }}</td>
                                 <td class="border border-gray-300 px-4 py-2 text-center">
                                     {{-- Deze link opent de allergenenpagina voor dit product. --}}
-                                    <a href="{{ route('allergenen.show', ['productId' => $product->product_id]) }}"
+                                    <a href="{{ route('allergenen.show', ['productId' => $product->ProductId]) }}"
                                        title="Allergeneninformatie" class="text-red-600 hover:text-red-800 font-bold text-xl inline-block px-2 py-1">❌</a>
                                 </td>
                                 <td class="border border-gray-300 px-4 py-2 text-center">
                                     {{-- Deze link opent de leveringsinformatie voor dit product. --}}
-                                    <a href="{{ route('leverantie.show', ['productId' => $product->product_id]) }}"
+                                    <a href="{{ route('leverantie.show', ['productId' => $product->ProductId]) }}"
                                        title="Leverantie informatie" class="text-blue-600 hover:text-blue-800 font-bold text-xl inline-block px-2 py-1">?</a>
                                 </td>
                             </tr>
