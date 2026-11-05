@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\LeverancierRepository;
+use App\Models\Leverancier;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class LeverancierController extends Controller
 {
-    // Laravel injecteert de repository voor databasebewerkingen rond leveranciers.
-    public function __construct(private LeverancierRepository $leveranciers) {}
-
     // Toont het overzicht met leveranciers.
     public function index(): View
     {
-        $leveranciers = $this->leveranciers->getLeveranciers();
+        $leveranciers = Leverancier::overzicht();
 
         return view('leveranciers.index', compact('leveranciers'));
     }
@@ -23,13 +20,15 @@ class LeverancierController extends Controller
     // Toont de gegevens en producten van de gekozen leverancier.
     public function producten(int $leverancierId): View
     {
-        $leverancier = $this->leveranciers->getLeverancier($leverancierId);
+        $leverancier = Leverancier::query()
+            ->where('IsActief', true)
+            ->find($leverancierId);
 
         if (! $leverancier) {
             abort(404);
         }
 
-        $producten = $this->leveranciers->getGeleverdeProducten($leverancierId);
+        $producten = $leverancier->geleverdeProducten();
 
         return view('leveranciers.producten', compact('leverancier', 'producten'));
     }
@@ -37,7 +36,8 @@ class LeverancierController extends Controller
     // Controleert de leverancier/productcombinatie en toont het leveringsformulier.
     public function createLevering(int $leverancierId, int $productId): View
     {
-        $leverancier = $this->leveranciers->getLeverancierProduct($leverancierId, $productId);
+        $leverancierModel = Leverancier::query()->find($leverancierId);
+        $leverancier = $leverancierModel?->productVoorLevering($productId);
 
         if (! $leverancier) {
             abort(404);
@@ -46,10 +46,11 @@ class LeverancierController extends Controller
         return view('leveranciers.levering', compact('leverancier'));
     }
 
-    // Valideert het formulier en laat de repository de levering opslaan.
+    // Valideert het formulier en laat het model de levering opslaan.
     public function storeLevering(Request $request, int $leverancierId, int $productId): RedirectResponse
     {
-        $leverancier = $this->leveranciers->getLeverancierProduct($leverancierId, $productId);
+        $leverancierModel = Leverancier::query()->find($leverancierId);
+        $leverancier = $leverancierModel?->productVoorLevering($productId);
 
         if (! $leverancier) {
             abort(404);
@@ -60,8 +61,7 @@ class LeverancierController extends Controller
             'datum_eerst_volgende_levering' => ['required', 'date_format:Y-m-d'],
         ]);
 
-        $isOpgeslagen = $this->leveranciers->voegLeveringToe(
-            $leverancierId,
+        $isOpgeslagen = $leverancierModel->voegLeveringToe(
             $productId,
             (int) $validated['aantal'],
             $validated['datum_eerst_volgende_levering']

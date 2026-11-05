@@ -62,7 +62,7 @@
                     </table>
                 </div>
 
-                @if (empty($producten))
+                @if ($producten->isEmpty())
                     <script>
                         window.setTimeout(() => {
                             window.location.href = @json(route('leveranciers.index'));
